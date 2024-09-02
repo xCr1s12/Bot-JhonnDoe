@@ -20,12 +20,13 @@ async def on_ready():
 
 
 @bot.command(name= "saludo")
-async def hola(ctx):
+async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasando en el momento y en donde esta funcionando el bot mas o menos
     member: discord.Member = ctx.author
     roles = [role.name for role in member.roles]
     if "Persona" in roles:
         await ctx.send(f"Hola {member.name}")
 
+@bot.command(name = "Mute")
 
 
 bot.run(my_secret)
