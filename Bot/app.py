@@ -28,5 +28,7 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
 
 @bot.command(name = "Mute")
 
+#Recuerda que siempre tienes que prender el bot moviendote hasta la carpeta script y poniendo activate en el cmd
+#luego tienes que poner "py app.py"
 
 bot.run(my_secret)
