@@ -15,7 +15,12 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print(f"{bot.user} ha conectado")
+#Fijate pke  no funca este evento porfi
+@bot.event 
+async def on_member_join(member: discord.Member):
+    channel = bot.get_channel(1278837620108955791)
 
+    await channel.send(f"{member.name} hola muchacho")
 
 
 
@@ -26,9 +31,13 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
     if "Persona" in roles:
         await ctx.send(f"Hola {member.name}")
 
-@bot.command(name = "Mute")
-
 #Recuerda que siempre tienes que prender el bot moviendote hasta la carpeta script y poniendo activate en el cmd
 #luego tienes que poner "py app.py"
+
+
+
+
+
+
 
 bot.run(my_secret)
