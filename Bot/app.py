@@ -10,18 +10,22 @@ my_secret = os.getenv("TOKEN")
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user} ha conectado')
+    print(f"{bot.user} ha conectado")
 
-@bot.command(name="saludo")
-async def hello(ctx):
-    await ctx.send(f'Hola {ctx.author.name}, ¡bienvenido!')
 
-@bot.command(name="patata")
-async def patata(ctx):
-    if ctx.author.role == 
+
+
+@bot.command(name= "saludo")
+async def hola(ctx):
+    member: discord.Member = ctx.author
+    roles = [role.name for role in member.roles]
+    if "Persona" in roles:
+        await ctx.send(f"Hola {member.name}")
+
+
 
 bot.run(my_secret)
