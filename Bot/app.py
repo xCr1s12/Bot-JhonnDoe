@@ -9,7 +9,7 @@ my_secret = os.getenv("TOKEN")
 
 intents = discord.Intents.default()
 intents.message_content = True
-
+intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
@@ -19,17 +19,17 @@ async def on_ready():
     print(f"{bot.user} ha conectado")
 
 
-#Fijate pke  no funca este evento porfi
-@bot.event 
-async def on_member_join(ctx):
-    channel = bot.get_channel(1278837620108955791)#aqui va la id del canal  en el parametro 
-
-    await channel.send(f"{ctx.author.name} hola muchacho")
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(1278837620108955791)
+    if channel is not None:
+        await channel.send(f'Welcome to the server, {member.mention}!')
 
 
 
 @bot.command(name= "saludo")
 async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasando en el momento y en donde esta funcionando el bot mas o menos
+    
     member: discord.Member = ctx.author
     roles = [role.name for role in member.roles]
     if "Persona" in roles:
