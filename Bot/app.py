@@ -23,7 +23,7 @@ async def on_ready():
 async def on_member_join(member):
     channel = bot.get_channel(1278837620108955791)
     if channel is not None:
-        await channel.send(f'Welcome to the server, {member.mention}!')
+        await channel.send(f"hola, {member.mention}!")
 
 
 
