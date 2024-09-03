@@ -38,7 +38,24 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
 #Recuerda que siempre tienes que prender el bot moviendote hasta la carpeta script y poniendo activate en el cmd
 #luego tienes que poner "py app.py"
 
+# evento cuando un miembro entra al server
+@bot.event
+async def on_member_join(member):
+    guild = member.guild
+    await update_member_count(guild)
 
+# evento cuando un miembro se va del server
+@bot.event
+async def on_member_remove(member):
+    guild = member.guild
+    await update_member_count(guild)
+
+# Función que actualiza el un canal que se llama "member-count" con el numero actual de miembros
+async def update_member_count(guild):
+    member_count = guild.member_count
+    channel = discord.utils.get(guild.channels, name="member-count")  # Puedes cambiar el nombre del canal
+    if channel:
+        await channel.edit(name=f"Member Count: {member_count}")
 
 
 
