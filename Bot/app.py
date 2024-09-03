@@ -12,15 +12,19 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+
+
 @bot.event
 async def on_ready():
     print(f"{bot.user} ha conectado")
+
+
 #Fijate pke  no funca este evento porfi
 @bot.event 
-async def on_member_join(member: discord.Member):
-    channel = bot.get_channel(1278837620108955791)
+async def on_member_join(ctx):
+    channel = bot.get_channel(1278837620108955791)#aqui va la id del canal  en el parametro 
 
-    await channel.send(f"{member.name} hola muchacho")
+    await channel.send(f"{ctx.author.name} hola muchacho")
 
 
 
