@@ -53,7 +53,6 @@ async def update_member_count(guild):
         await channel.edit(name=f"Member Count: {member_count}")
 
 
-#FUncion cuando un miembro se va (sin terminar)
 
 
 
