@@ -57,7 +57,7 @@ async def update_member_count(guild):
 # funcion para crear tiket
 @bot.event
 async def ticket():
-        
+        pass
 
 
 
