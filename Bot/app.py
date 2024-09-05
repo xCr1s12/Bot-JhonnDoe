@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 
+
 load_dotenv()
 my_secret = os.getenv("TOKEN")
+
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -16,14 +18,10 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 #############################################################
-
 @bot.event
 async def on_ready():
     print(f"{bot.user} ha conectado")
 
-
-
-#evento cuando un usuario entra al sv (Terminado)
 @bot.event
 async def on_member_join(member):
     channel = bot.get_channel(1280585136286601328)
@@ -57,14 +55,8 @@ async def update_member_count(guild):
         await channel.edit(name=f"Member Count: {member_count}")
 
 
-#----------------------------------------------#
-@bot.command(name= "saludo")
-async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasando en el momento y en donde esta funcionando el bot mas o menos
-    
-    member: discord.Member = ctx.author
-    roles = [role.name for role in member.roles] 
-    if "Persona" in roles:
-        await ctx.send(f"Hola {member.name}")
+
+
 
 
 # -------- Evento para los tickets
@@ -81,9 +73,13 @@ async def on_ready():
         mensaje = await channel.send("Reaciona con un 🎫 para abrir un ticket.")
         await mensaje.add_reaction("🎫")
 
+
 # Evento para manejar la reaccion
 @bot.event
 async def on_reaction_add(reaction,user):
+    guild = reaction.message.guild
+    category = discord.utils.get(guild.categories, id=1281109607162445824)
+    num_Ticket = len(category.channels)
     if user.bot:
         return
     
@@ -97,9 +93,18 @@ async def on_reaction_add(reaction,user):
 
          # Crear el canal de ticket
         ticket_channel = await guild.create_text_channel(
-            f'ticket-{user.name}',
-            overwrites=overwrites
+            f'ticket-{num_Ticket}',
+            overwrites=overwrites,
+            category = category
         )
 
+#----------------------------------------------#
+@bot.command(name= "saludo")
+async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasando en el momento y en donde esta funcionando el bot mas o menos
+    
+    member: discord.Member = ctx.author
+    roles = [role.name for role in member.roles] 
+    if "Persona" in roles:
+        await ctx.send(f"Hola {member.name}")
 
 bot.run(my_secret)
