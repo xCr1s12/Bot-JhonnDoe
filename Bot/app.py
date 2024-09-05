@@ -77,9 +77,9 @@ async def on_ready():
 # Evento para manejar la reaccion
 @bot.event
 async def on_reaction_add(reaction,user):
-    guild = reaction.message.guild
-    category = discord.utils.get(guild.categories, id=1281109607162445824)
-    num_Ticket = len(category.channels)
+    guild = reaction.message.guild #ESTO DE ACA REUNE LOS DATOs
+    category = discord.utils.get(guild.categories, id=1281109607162445824)#Esto guarda la info de la categoria a la q se va enviar el ticket
+    num_Ticket = len(category.channels) # y esto cuenta los canales en la categoria
     if user.bot:
         return
     
