@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 
-
 load_dotenv()
 my_secret = os.getenv("TOKEN")
 
@@ -21,6 +20,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print(f"{bot.user} ha conectado")
+
 
 @bot.event
 async def on_member_join(member):
@@ -66,7 +66,6 @@ channel_id = 1281011438307250288
 
 @bot.event
 async def on_ready():
-    print(f"Bot conectado como {bot.user}")
 
     channel = bot.get_channel(channel_id)
     if channel:
@@ -97,8 +96,8 @@ async def on_reaction_add(reaction,user):
             overwrites=overwrites,
             category = category
         )
+############## sin terminar
 
-#----------------------------------------------#
 @bot.command(name= "saludo")
 async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasando en el momento y en donde esta funcionando el bot mas o menos
     
@@ -106,5 +105,27 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
     roles = [role.name for role in member.roles] 
     if "Persona" in roles:
         await ctx.send(f"Hola {member.name}")
+
+
+@bot.command(name = "Bdelete")
+@commands.has_permissions(manage_messages=True)
+
+async def bdelete(ctx, count: int):
+    
+    await ctx.channel.purge(limit=count + 1)
+
+"""@bot.event
+async def on_message(message):
+    Bad_words = ["puto"]
+    if message.author == bot.user:
+        return 
+    for i in message.content:
+        if i in Bad_words[0]:
+            await message.delete( delay = None)
+
+"""
+
+
+
 
 bot.run(my_secret)
