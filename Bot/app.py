@@ -17,9 +17,38 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 #############################################################
+
+@bot.command(name = "bdelete")
+@commands.has_permissions(manage_messages=True)#permiso unico admins
+
+async def bdelete(ctx, count: int):
+    await ctx.channel.purge(limit=count + 1)#Borrar :v 
+    
+    
+@bot.event
+async def on_message(message):
+    imagenes_channel_id = 1281678969963282492 # Id del canal "Imagenes" (id del Server de prueba)
+    if message.author.bot: # esto hace que si el autor del mensaje es el bot, no hace nada
+        return
+
+    if message.attachments: # <-- Verifica si el mensaje contiene un "archivo adjunto"
+        
+        if message.channel.id != imagenes_channel_id and not message.author.guild_permissions.administrator: # <-- Verifica si el canal no es el de "imagenes"
+            await message.delete() # <-- elimina el mensaje 
+             # Mensaje de advertencia, se borra despues de 10 segundos.
+            await message.channel.send(f"{message.author.mention}, porfavor envía las imágenes en el canal <#{imagenes_channel_id}>.", delete_after=10) 
+
+    await bot.process_commands(message)
+
+
 @bot.event
 async def on_ready():
     print(f"{bot.user} ha conectado")
+
+    channel = bot.get_channel(channel_id)
+    if channel:
+        mensaje = await channel.send("Reaciona con un 🎫 para abrir un ticket.")
+        await mensaje.add_reaction("🎫")
 
 
 @bot.event
@@ -64,13 +93,7 @@ async def update_member_count(guild):
 # ID del canal de "Tickets"
 channel_id = 1281011438307250288
 
-@bot.event
-async def on_ready():
 
-    channel = bot.get_channel(channel_id)
-    if channel:
-        mensaje = await channel.send("Reaciona con un 🎫 para abrir un ticket.")
-        await mensaje.add_reaction("🎫")
 
 
 # Evento para manejar la reaccion
@@ -98,6 +121,9 @@ async def on_reaction_add(reaction,user):
         )
 ############## sin terminar
 
+
+
+
 @bot.command(name= "saludo")
 async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasando en el momento y en donde esta funcionando el bot mas o menos
     
@@ -107,12 +133,6 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
         await ctx.send(f"Hola {member.name}")
 
 
-@bot.command(name = "Bdelete")
-@commands.has_permissions(manage_messages=True)#permiso unico admins
-
-async def bdelete(ctx, count: int):
-    
-    await ctx.channel.purge(limit=count + 1)#Borrar :v 
 
 """@bot.event
 async def on_message(message):
@@ -126,19 +146,5 @@ async def on_message(message):
 """
 
 # Evento "Borrar imágen enviada en canal erróneo"
-@bot.event
-async def on_message(message):
-    imagenes_channel_id = 1281678969963282492 # Id del canal "Imagenes" (id del Server de prueba)
-
-    if message.author.bot: # esto hace que si el autor del mensaje es el bot, no hace nada
-        return
-    
-    if message.attachments: # <-- Verifica si el mensaje contiene un "archivo adjunto"
-        
-        if message.channel.id != imagenes_channel_id: # <-- Verifica si el canal no es el de "imagenes"
-            await message.delete() # <-- elimina el mensaje 
-                                                                                                            # Mensaje de advertencia, se borra despues de 10 segundos.
-            await message.channel.send(f"{message.author.mention}, porfavor envía las imágenes en el canal <#{imagenes_channel_id}>.", delete_after=10) 
-
 
 bot.run(my_secret)
