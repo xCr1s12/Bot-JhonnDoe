@@ -125,7 +125,20 @@ async def on_message(message):
 
 """
 
+# Evento "Borrar imágen enviada en canal erróneo"
+@bot.event
+async def on_message(message):
+    imagenes_channel_id = 1281678969963282492 # Id del canal "Imagenes" (id del Server de prueba)
 
+    if message.authot.bot: # esto hace que si el autor del mensaje es el bot, no hace nada
+        return
+    
+    if message.attachments: # <-- Verifica si el mensaje contiene un "archivo adjunto"
+        
+        if message.channel.id != imagenes_channel_id: # <-- Verifica si el canal no es el de "imagenes"
+            await message.delete() # <-- elimina el mensaje 
+                                                                                                            # Mensaje de advertencia, se borra despues de 10 segundos.
+            await message.channel.send(f"{message.author.mention}, porfavor envía las imágenes en el canal <#{imagenes_channel_id}>.", delete_after=10) 
 
 
 bot.run(my_secret)
