@@ -108,11 +108,11 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
 
 
 @bot.command(name = "Bdelete")
-@commands.has_permissions(manage_messages=True)
+@commands.has_permissions(manage_messages=True)#permiso unico admins
 
 async def bdelete(ctx, count: int):
     
-    await ctx.channel.purge(limit=count + 1)
+    await ctx.channel.purge(limit=count + 1)#Borrar :v 
 
 """@bot.event
 async def on_message(message):
