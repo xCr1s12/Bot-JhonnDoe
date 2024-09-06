@@ -121,7 +121,7 @@ async def on_message(message):
         return 
     for i in message.content:
         if i in Bad_words[0]:
-            await message.delete( delay = None)
+            await message.delete
 
 """
 
@@ -130,7 +130,7 @@ async def on_message(message):
 async def on_message(message):
     imagenes_channel_id = 1281678969963282492 # Id del canal "Imagenes" (id del Server de prueba)
 
-    if message.authot.bot: # esto hace que si el autor del mensaje es el bot, no hace nada
+    if message.author.bot: # esto hace que si el autor del mensaje es el bot, no hace nada
         return
     
     if message.attachments: # <-- Verifica si el mensaje contiene un "archivo adjunto"
