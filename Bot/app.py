@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 
+
 #Carga el token del bot 
 load_dotenv()
 my_secret = os.getenv("TOKEN")
