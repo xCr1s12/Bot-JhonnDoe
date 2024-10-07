@@ -98,14 +98,22 @@ async def update_member_count(guild):
 """
 saluda a miembros nuevos :3 
 """
+    # URL de la imagen de bienvenida (debes reemplazarla con la tuya)
+BANNER = "logo.png"
+
+# ID del canal donde quieres que se envíen los mensajes de bienvenida
+ID_CANAL_BIENVENIDA = 1280585136286601328  # Reemplaza con el ID de tu canal
+
 @bot.event
 async def on_member_join(member):
-    channel = bot.get_channel(1280585136286601328)
-    if channel is not None:
-        await channel.send(f"hola, {member.mention}!")
-        
-    guild = member.guild #esto es algo que tu hiciste pero lo movi para que se actualice junto con la entrada y salida
-    await update_member_count(guild)
+    # Obtener el canal de bienvenida
+    channel = bot.get_channel(ID_CANAL_BIENVENIDA)
+    if channel:
+        # Enviar mensaje de bienvenida con una mención al nuevo usuario
+        await channel.send(f"¡Bienvenido/a, {member.mention}! 🎉 Estamos felices de tenerte aquí.")
+
+        # Enviar el banner de bienvenida
+        await channel.send(BANNER)
 
 """
 Despide a antiguos usuarios
@@ -140,6 +148,21 @@ async def on_message(message):
 
 #####################################################################################
 """
+Aca va el comando de saludo del bot
+"""
+
+
+
+
+
+
+
+
+
+
+
+#####################################################################################
+"""
 Aqui comienza la seccion de comandos
 """
 
@@ -166,3 +189,4 @@ async def clc(ctx, count: int):
     await ctx.channel.purge(limit=count + 1)#Borrar :v 
 
 bot.run(my_secret)
+
