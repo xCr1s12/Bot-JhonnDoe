@@ -17,6 +17,9 @@ intents.message_content = True
 intents.reactions = True
 intents.members = True
 
+embed = discord.Embed()
+
+
 #bot xd 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -99,8 +102,8 @@ async def update_member_count(guild):
 saluda a miembros nuevos :3 
 """
     # URL de la imagen de bienvenida (debes reemplazarla con la tuya)
-BANNER = "logo.png"
-
+file = discord.File("assets/logo.png", filename="logo.png")
+embed.set_image(url="attachment://logo.png")
 # ID del canal donde quieres que se envíen los mensajes de bienvenida
 ID_CANAL_BIENVENIDA = 1280585136286601328  # Reemplaza con el ID de tu canal
 
@@ -113,7 +116,7 @@ async def on_member_join(member):
         await channel.send(f"¡Bienvenido/a, {member.mention}! 🎉 Estamos felices de tenerte aquí.")
 
         # Enviar el banner de bienvenida
-        await channel.send(BANNER)
+        await channel.send(file=file, embed=embed)
 
 """
 Despide a antiguos usuarios
