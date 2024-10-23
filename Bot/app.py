@@ -2,13 +2,11 @@ from colorama import Fore, Back, Style
 import logging
 import discord
 import os
-from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 
 
 #Carga el token del bot 
-load_dotenv()
 my_secret = os.getenv("TOKEN")
 
 #Permisos para el bot
@@ -176,5 +174,18 @@ async def hola(ctx): #ctx es el parametro de contexto, es como lo que esta pasan
 async def clc(ctx, count: int):
     await ctx.channel.purge(limit=count + 1)#Borrar :v 
 
-bot.run(my_secret)
 
+
+
+##########
+"""
+!sugerencia
+"""
+
+@bot.command(name = "sugerencia")
+
+async def suggest(ctx):
+    pass
+
+
+bot.run(my_secret)
