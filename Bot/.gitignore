@@ -1,0 +1,14 @@
+# Ignorar el entorno virtual (env)
+env/
+venv/
+# Para diferentes sistemas operativos, por si acaso
+*.pyc
+__pycache__/
+
+# Ignorar archivos de configuración con información sensible
+.env
+
+# Ignorar configuraciones de IDEs y editores comunes
+.vscode/
+.idea/
+*.swp
