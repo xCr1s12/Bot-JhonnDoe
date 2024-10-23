@@ -1,8 +1,10 @@
 import discord
 import os
+from dotenv import load_dotenv
 from discord.ext import commands
 import asyncio
 
+load_dotenv()
 
 #Carga el token del bot 
 my_secret = os.getenv("TOKEN")
@@ -141,9 +143,11 @@ async def clc(ctx, count: int):
 @bot.command(name = "sugerencia")
 
 async def suggest(ctx, message:str):
-    new_message = message
     channel = bot.get_channel(sugerencias)
-        await channel.send(f"{message.autor}")    
+    newmsg = message
+    if message == newmsg:
+        await ctx.channel.purge(limit= 1) 
+    await channel.send(f"el usuario {ctx.author}: ha sugerido '{message}' ")  
 
 
 
